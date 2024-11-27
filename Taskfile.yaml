@@ -16,20 +16,20 @@ tasks:
     desc: 'Sync i18n environment'
     dir: '{{.TASKFILE_DIR}}'
     cmds:
-      - '{{.RUN_PYTHON}} sphinx-build -M gettext . _build {{.SPHINX_OPTIONS}}'
+      - '{{.RUN_PYTHON}} sphinx-build -M gettext source build {{.SPHINX_OPTIONS}}'
       - '{{.RUN_PYTHON}} sphinx-intl update --language={{.SPHINX_LANGUAGES | join ","}}'
   dev:
     desc: 'Run docs server'
     dir: '{{.TASKFILE_DIR}}'
     cmds:
-      - '{{.RUN_PYTHON}} sphinx-autobuild -b dirhtml . _build/dirhtml'
+      - '{{.RUN_PYTHON}} sphinx-autobuild -b dirhtml source build/dirhtml'
   build-*:
     desc: 'Make docs'
     dir: '{{.TASKFILE_DIR}}'
     vars:
       TARGET: '{{index .MATCH 0}}'
     cmds:
-      - '{{.RUN_PYTHON}} sphinx-build -M {{.TARGET}} . _build'
+      - '{{.RUN_PYTHON}} sphinx-build -M {{.TARGET}} source build'
   build:
     desc: 'Make docs (default target)'
     deps:
