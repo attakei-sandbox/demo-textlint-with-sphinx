@@ -1,0 +1,6 @@
+pre-commit:
+  parallel: true
+  commands:
+    textlint:
+      glob: "*.rst"
+      run: "uv run pnpm textlint {staged_files}"

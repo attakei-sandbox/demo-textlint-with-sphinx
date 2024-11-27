@@ -1,0 +1,22 @@
+{
+	"name": "demo-textlint-with-sphinx",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"postinstall": "lefthook install",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"lefthook": "^1.8.4"
+	},
+	"dependencies": {
+		"textlint": "^14.3.0",
+		"textlint-filter-rule-comments": "^1.2.2",
+		"textlint-plugin-rst": "github:attakei-sandbox/textlint-plugin-rst#for-literal",
+		"textlint-rule-preset-ja-technical-writing": "^10.0.1"
+	}
+}
