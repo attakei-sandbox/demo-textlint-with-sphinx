@@ -1,0 +1,41 @@
+name: 'Default CI jobs'
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v4'
+      - uses: 'astral-sh/setup-uv@v3'
+      - uses: 'pnpm/action-setup@v4'
+        with:
+          version: '9.5.0'
+      - uses: 'actions/setup-node@v4'
+        with:
+          cache: 'pnpm'
+      - name: 'Configure env'
+        run: |
+          uv sync --frozen
+          pnpm install
+      - name: 'Run linter'
+        run: |
+          uv run pnpm lefthook run pre-commit --all-files
+  build-epub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 'actions/checkout@v4'
+      - uses: 'astral-sh/setup-uv@v3'
+      - uses: 'arduino/setup-task@v2'
+      - name: 'Configure venv'
+        run: |
+          uv sync --frozen
+      - name: 'Build epub'
+        run: 'task build-epub'
